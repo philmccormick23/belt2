@@ -1,0 +1,25 @@
+<h1>Welcome to the Dojo Activity Center</h1>
+<a href="/">Back to Registration</a>
+
+
+<h2>Already have an account? Login here.</h2>
+@if (ViewBag.message != null)
+{
+  <p>@ViewBag.message</p>
+}
+
+@using BeltExam.Models
+@model LoginUser
+    <form action="Login" method="post">
+        <label asp-for="loginemail">Email</label>
+        <input asp-for="loginemail"/>
+        <span asp-validation-for="loginemail"></span>
+        
+        <label asp-for="loginpw">Password</label>
+        <input asp-for="loginpw"/>
+        <span asp-validation-for="loginpw"></span>
+        <br>
+        <input type="submit" value="Login!"/>
+
+    </form>
+

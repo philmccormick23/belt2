@@ -1,0 +1,30 @@
+<h1>Welcome to the Dojo Activity Center</h1>
+<a href="/login">Login</a>
+
+<h2> New User? Register Here. </h2>
+@using BeltExam.Models
+@model User
+<form asp-controller="Home" asp-action="Register" method="POST">
+
+        <span asp-validation-for="FirstName"></span>
+        <label asp-for="FirstName"> First Name : </label>
+        <input asp-for="FirstName"><br><br>
+
+        <span asp-validation-for="LastName"></span>
+        <label asp-for="LastName"> Last Name : </label>
+        <input asp-for="LastName"><br><br>
+
+        <span asp-validation-for="Email"></span>
+        <label asp-for="Email"> Email:</label>  
+        <input asp-for="Email"><br><br>
+
+        <span asp-validation-for="Password"></span>
+        <label asp-for="Password">Password : </label>
+        <input asp-for="Password"><br><br>
+
+        <span asp-validation-for="Confirm"></span>
+        <label asp-for="Confirm">Confirm Password : </label>
+        <input asp-for="Confirm"><br><br> 
+        
+        <button type="submit" class="btn btn-primary float-right btn-sm">Register</button>
+</form>

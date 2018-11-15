@@ -1,0 +1,44 @@
+<h1>show an activity</h1>
+<a href="/Home">Back to Dashboard</a>
+<a href="/Logout">Logout</a>
+
+<h2>@ViewBag.activity.ActivityTitle</h2>
+
+<h4>Event Coordinator</h4>
+<p>@ViewBag.activity.User.FirstName @ViewBag.activity.User.LastName</p>
+
+<h4>Event Description</h4>
+<p>@ViewBag.activity.Description</p>
+
+<h4>Participants</h4>
+
+@{
+    foreach(var person in @ViewBag.activity.RSVPs) {
+        <ul>
+            <li>@person.User.FirstName</li>
+        </ul>
+    }
+}
+
+<p>__________________________________________________________________________________________________________________</p>
+@{
+                var attending = false;
+                foreach(var guest in @ViewBag.activity.RSVPs)
+                {
+                    if(guest.UserId == @ViewBag.User.UserId){
+                        attending = true;
+                    }
+                }
+                @if(@ViewBag.User.UserId == @ViewBag.activity.User.UserId)
+                {
+                    <a href="/delete/@ViewBag.activity.ActivityId">Delete this Event</a>
+                }
+                else if(attending)
+                {
+                    <a href="/unrsvp/@ViewBag.activity.ActivityId">Leave this Event</a>
+                } 
+                else 
+                {
+                    <a href="/rsvp/@ViewBag.activity.ActivityId">Join this Event</a>
+                }
+            }

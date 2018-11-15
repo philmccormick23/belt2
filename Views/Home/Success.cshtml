@@ -1,0 +1,68 @@
+<h1>Welcome to the Dojo Activity Center!</h1>
+<a href="/Logout">Sign Out</a>
+<a href="/New">Add an Activity</a>
+<h3>Welcome, @ViewBag.User.FirstName!!</h3>
+
+<style>
+  td {
+    border: 1px solid black;
+    width: 10%;
+    text-align: center;
+  }
+  th {
+    border: 1px solid black;
+    width: 10%;
+    text-align: center;
+    background-color: darkgrey;
+    color: white;
+  }
+
+</style>
+
+<table>
+  <tr>
+    <th>Activity</th>
+    <th>Date and Time</th>
+    <th>Duration</th>
+    <th>Event Coordinator</th>
+    <th>Number of Participants</th>
+    <th>Actions</th>
+  </tr>
+
+@{
+  foreach(var item in @ViewBag.AllActivities) {
+
+    <tr>
+      <td><a href="/activity/@item.ActivityId">@item.ActivityTitle</a></td>
+      <td>@item.ActivityDate</td>
+      <td>@item.Duration @item.DurationType</td>
+      <td>@item.User.FirstName</td>
+      <td>@item.RSVPs.Count</td>
+      @{
+                var attending = false;
+                foreach(var guest in @item.RSVPs)
+                {
+                    if(guest.UserId == @ViewBag.User.UserId){
+                        attending = true;
+                    }
+                }
+                @if(@ViewBag.User.UserId == @item.UserId)
+                {
+                    <td><a href="delete/@item.ActivityId">Delete</a></td>
+                }
+                else if(attending)
+                {
+                    <td><a href="unrsvp/@item.ActivityId">Leave</a></td>
+                } 
+                else 
+                {
+                    <td><a href="/rsvp/@item.ActivityId">Join</a></td>
+                }
+            }
+      
+
+    </tr>
+  }
+}
+
+</table>
